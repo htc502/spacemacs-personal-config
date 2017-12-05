@@ -5,8 +5,9 @@ brew linkapps emacs-plus
 brew tap caskroom/fonts
 brew cask install font-source-code-pro
 rm -rf ~/.emacs.d
-rm ~/.spacemacs
-rm ~/.private
 git clone -b develop https://github.com/syl20bnr/spacemacs ~/.emacs.d
-ln -s ./dotspacemacs ~/.spacemacs
-ln -s ./spacemacs_private  ~/.emacs.d/private
+rm ~/.spacemacs
+rm -rf ~/.emacs.d/private
+curDir=$(pwd)
+ln -s ${curDir}/dotspacemacs ~/.spacemacs
+ln -s ${curDir}/spacemacs_private  ~/.emacs.d/private
