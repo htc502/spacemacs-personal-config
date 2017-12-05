@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: library frequently used packages
+# key: lf
+# --
+library(readxl)
+library(readr)
+library(tidyverse)
+library(pheatmap)
+
+
