@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : clean current workspace: rm(list=ls())
+#key : cls
+#contributor : ewre
+# --
+rm(list=ls())

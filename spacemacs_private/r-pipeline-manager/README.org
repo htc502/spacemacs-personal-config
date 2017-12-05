@@ -1,0 +1,124 @@
+#+TITLE: r-pipeline-manager layer
+
+# The maximum height of the logo should be 200 pixels.
+[[img/r-pipeline-manager.png]]
+
+# TOC links should be GitHub style anchors.
+* Table of Contents                                        :TOC_4_gh:noexport:
+ - [[#description][Description]]
+   - [[#a-pipeline-manager-to-organize-r-scripts-for-one-project][A pipeline manager to organize r scripts for one project]]
+     - [[#naming-rule-of-the-scripts-under-management][Naming rule of the scripts under management:]]
+     - [[#logic-behind-the-naming-rule-to-organize-automatically][Logic behind the naming rule: to organize automatically.]]
+       - [[#a-script-name-must-take-the-following-form][A script name must take the following form:]]
+       - [[#a-script-in-the-pipeline-should-define-input-and-output-files][A script in the pipeline should define input and output files]]
+       - [[#sequential-steps-are-connected-and-detected-by-the-input-and-output-files][Sequential steps are connected (and detected) by the input and output files]]
+     - [[#make-a-display-for-the-pipeline][Make a display for the pipeline]]
+     - [[#generate-ppt-report-reporters][Generate ppt report (ReporteRs)]]
+     - [[#add-code-for-checking-rules][Add code for checking rules]]
+     - [[#dependency][Dependency]]
+ - [[#install][Install]]
+   - [[#if-you-have-already-installed-spacemacs][if you have already installed spacemacs]]
+   - [[#if-this-is-a-new-install-of-spacemacs][if this is a new install of spacemacs]]
+ - [[#key-bindings][Key bindings]]
+
+* Description
+  This layer does wonderful things:
+  - generate a relationship figure for the scripts used in a project.
+
+
+** A pipeline manager to organize r scripts for one project
+
+*** Naming rule of the scripts under management:
+    #+BEGIN_SRC 
+    a.1.descxxx.r
+    a.2.descxxx.r
+    b.1.descxxx.r
+    b.2.descxxx.r 
+    etc.
+    #+END_SRC
+    With this naming rule, the total number of scripts inside each project will be 26*10 at maximum.
+
+*** Logic behind the naming rule: to organize automatically.
+
+   
+    In order to get the pipeline structure automatically generated, the names of the scripts need to follow some rules.
+    
+**** A script name must take the following form:
+     #+BEGIN_SRC 
+     [a-z].[0-9].description.r
+     #+END_SRC
+
+***** [a-z] is used to separate the scripts into sequential order. [0-9] is useful in case there are multiple(parallel) sub-steps in each step.
+
+***** Description is simple words used to indicate the function of the script. finally the scripts show have '.r' suffix instead of '.R'.
+
+***** Scripts failed to follow this form will simply be ignored (pattern=[a-z]\\.[0-9]\\..*\\.r).
+
+  
+**** A script in the pipeline should define input and output files
+
+***** Here is an example for defining the input and output files:
+      #+BEGIN_SRC 
+       #' @input: inputx.rda inputy.rda
+       #' @output: output.rda
+      #+END_SRC
+      Input and output definition lines start with "#'", followed by a space and "@input[output]:". For each script, multiple input files are allowed. But
+      it should only generate one output file. if you found it will generate multiple output files, probably you need to separate this script into two
+      more specific ones.
+       #+BEGIN_SRC 
+       #' @input: 0
+      #+END_SRC
+      means no input file is needed. Be sure to put at least one space after '@input:'.
+
+**** Sequential steps are connected (and detected) by the input and output files
+
+       1. All input and output files should be in =rda= format, except the most initial script(s) (probably a.xxx.xxx.r) which may read in original data from various formats.  
+       2. One script may accept multiple input files  
+       3. For simplicity, one script should have only one output file or don't have output file (do only one thing and do it well). if it has no output file, this script is probably plotting a figure or making a table that is not used by any other scripts (final results, conclusion figure or summary table).   
+
+
+*** Make a display for the pipeline
+
+    'DiagrammeR' for flowchart display  
+
+      
+*** Generate ppt report (ReporteRs)
+   
+*** Add code for checking rules
+      
+*** Dependency
+
+    1. R and R package diagram
+    2. imagetrack for displaying image within emacs
+
+
+* Install
+  To use this configuration layer, add it to your =~/.spacemacs=. You will need to
+  add =r-pipeline-manager= to the existing =dotspacemacs-configuration-layers= list in this
+  file.
+
+  Now I am on spacemacs. 
+  This repo is a fork of spacemacs official repo with the =r-pipeline-manager= private layer added. 
+ 
+** if you have already installed spacemacs
+   #+BEGIN_SRC 
+   git remote add htc502 https://github.com/htc502/spacemacs.git
+   git pull htc502 master
+   #+END_SRC
+   will do the trick.
+** if this is a new install of spacemacs
+   #+BEGIN_SRC 
+   git clone https://github.com/htc502/spacemacs.git
+   #+END_SRC
+
+* Key bindings
+
+  | Key Binding | Description    |
+  |-------------+----------------|
+  | ~SPC x x x~ | Does thing01   |
+  # Use GitHub URLs if you wish to link a Spacemacs documentation file or its heading.
+  # Examples:
+  # [[https://github.com/syl20bnr/spacemacs/blob/master/doc/VIMUSERS.org#sessions]]
+  # [[https://github.com/syl20bnr/spacemacs/blob/master/layers/%2Bfun/emoji/README.org][Link to Emoji layer README.org]]
+  # If space-doc-mode is enabled, Spacemacs will open a local copy of the linked file.
+  Currently, there are two useful fxn in this layer: ghan-add-r-script and ghan-generate-pipeline. I haven't bind any key to both functions. 

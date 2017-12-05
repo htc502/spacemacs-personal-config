@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+#name : outputs tables and figures to ppt
+#key : plot2ppt
+#contributor : ewre
+# --
+library(ReporteRs)
+doc = pptx()
+doc = addSlide( doc, slide.layout = "$1" )
+doc = addTitle( doc, '$2')
+
+doc = addPlot( doc, fun = $3,width = 6,height = 6)
+
+writeDoc(doc,file = '$0.pptx')
+

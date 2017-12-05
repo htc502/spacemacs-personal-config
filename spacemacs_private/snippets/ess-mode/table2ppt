@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+#name : output table to ppt
+#key : table2ppt
+#contributor : ewre
+# --
+library(ReporteRs)
+doc = pptx()
+doc = addSlide( doc, slide.layout = "$1" )
+doc = addTitle( doc, '$2')
+
+doc = addFlexTable( doc ,$3)
+
+writeDoc(doc,file = '$0.pptx')
+

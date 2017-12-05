@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+#name : for loop code
+#key : 4loop
+#contributor : ewre
+# --
+  for($1 in $2) {
+  $0
+  }
