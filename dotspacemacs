@@ -50,6 +50,7 @@ values."
      syntax-checking
      version-control
      ess
+     python
      r-pipeline-manager
      )
    ;; List of additional packages that will be installed without being
