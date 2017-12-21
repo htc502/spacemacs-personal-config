@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: write tsv file using write_tsv in readr 
+# key: wrtsv
+# --
+write_tsv($1,$2)
