@@ -37,10 +37,9 @@ Argument PROJECT-ROOT-DIR work directory for your project."
     )
   )
 ;;(ghan-generate-r-pipeline-flowchart )
-(provide 'pipeline)
 
 ;;some small auxiliary fxns
-(defun ghan_swapOperand(start end)
+(defun ghan-swapOperand(start end)
   "swap the operators in the two side of ="
   (interactive "r")
   (let ((selContent (buffer-substring-no-properties start end)))
@@ -49,5 +48,10 @@ Argument PROJECT-ROOT-DIR work directory for your project."
     (goto-char start)
     (insert (string-join (reverse  (split-string selContent "="))  "=")))
   )
+;;insert date and time
+(defun ghan-insert-current-date ()
+  (interactive)
+       (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
+(provide 'pipeline)
 ;;; pipeline.el ends here
 
