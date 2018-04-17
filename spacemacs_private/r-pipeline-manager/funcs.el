@@ -49,7 +49,7 @@ Argument PROJECT-ROOT-DIR work directory for your project."
     (goto-char start)
     (insert (string-join (reverse  (split-string selContent "="))  "=")))
   )
-;;create a easy readable r script
+;;create an easy readable r script
 (defun ghan-new-r-script ()
   (interactive)
   "create an r script that is easily readable"
@@ -57,6 +57,25 @@ Argument PROJECT-ROOT-DIR work directory for your project."
     (pop-to-buffer (generate-new-buffer "new-r-script"))
    (insert (concat "## Creation date: "  (format-time-string "%Y-%m-%d %H:%M:%S") " \n\n" "## What does it do: \n\n" "## Statistical tests: \n\n" "## Data we need (Only include data you really need, don't put everything all together. \n## You can't combine them before you can correctly divide to get them.): \n\n"  "## Key data table 1: data table right after finish data cleaning \n" "## Key data table summary \n" "## Key data table 2: data table right before statistical test\n" "## Key data table 2 summary \n\n" "## Statistical test 1\n" "## Statistical test result 1\n\n" "## Result plot 1\n\n" "## End of the script\n"))
    )
+  )
+;; create an easy readable ruby script
+(defun ghan-new-rb-script ()
+  (interactive)
+  "create a ruby script that is easily readable"
+  (progn
+    (pop-to-buffer (generate-new-buffer "new-ruby-script"))
+    (insert (concat "## Creation date: " (format-time-string "%Y-%m-%d %H:%M:%S") "\n\n" "## What does it do: \n\n" "## End of the script\n"))
+    )
+    )
+;; grep content in pdf files (useful when writing scientific paper)
+;; require pdfgrep tool available from brew
+(defun ghan-pdfgrep()
+  (interactive)
+  "grep content in pdf file using pdfgrep"
+  (let ((keyword (read-string "keyword to search: ")))
+    (pop-to-buffer (generate-new-buffer "pdfgrep-result"))
+    (insert (shell-command-to-string (concat "pdfgrep " "\"" keyword "\" " "~/Dropbox/pdf-paper/*.pdf")))
+    )
   )
 ;;; pipeline.el ends here
 
