@@ -85,7 +85,7 @@ Argument PROJECT-ROOT-DIR work directory for your project."
 (defun ghan-ag-paper()
   (interactive)
   "grep content in paper file using helm-do-ag"
-  (helm-do-ag "/Users/ghan1/Dropbox/pdf-paper")
+  (helm-do-ag (expand-file-name "~/Dropbox/pdf-paper"))
   )
 ;;; pipeline.el ends here
 
