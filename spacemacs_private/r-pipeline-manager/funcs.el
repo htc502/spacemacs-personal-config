@@ -87,5 +87,11 @@ Argument PROJECT-ROOT-DIR work directory for your project."
   "grep content in paper file using helm-do-ag"
   (helm-do-ag (expand-file-name "~/Dropbox/pdf-paper"))
   )
+
+(defun ghan-helm-do-ag-codes()
+  (interactive)
+  "grep content in code files using helm-do-ag"
+  (helm-do-ag (expand-file-name "~/Dropbox/codes"))
+  )
 ;;; pipeline.el ends here
 
