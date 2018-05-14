@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+#name : define new function
+#key : defun
+#contributor : ewre
+# --
+$1 = function($2) {
+##what it does: $3
+##what it needs (parameter): $4
+##what it produces: $5
+$0
+}

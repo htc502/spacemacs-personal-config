@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: iffalse
+# key: iff
+# --
+if(F) {
+$1
+}

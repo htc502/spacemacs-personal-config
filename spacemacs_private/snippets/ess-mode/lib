@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: library frequently used packages
+# key: lib
+# --
+library(readxl)
+library(readr)
+library(tidyverse)
+
+
