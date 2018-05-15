@@ -2,7 +2,7 @@ if [ $(uname) = Darwin ];then
 brew uninstall emacs-plus
 brew tap d12frosted/emacs-plus
 brew install emacs-plus
-brew linkapps emacs-plus
+##brew linkapps emacs-plus ##this thing has been deprecated
 brew tap caskroom/fonts
 brew cask install font-source-code-pro
 fi
