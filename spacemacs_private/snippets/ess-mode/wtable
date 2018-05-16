@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: wtable
+# key: wtable
+# --
+write_tsv($1, paste0('$2',Sys.Date(),'.tsv'))
+
