@@ -58,7 +58,23 @@ Argument PROJECT-ROOT-DIR work directory for your project."
   "create an r script that is easily readable"
   (progn
     (pop-to-buffer (generate-new-buffer "new-r-script"))
-   (insert (concat "## Creation date: "  (format-time-string "%Y-%m-%d %H:%M:%S") " \n\n" "## What does it do: \n\n" "## Statistical tests: \n\n" "## Data we need (Only include data you really need, don't put everything all together. \n## You can't combine them before you can correctly divide to get them.): \n\n"  "## Key data table 1: data table right after finish data cleaning \n" "## Key data table summary \n" "## Key data table 2: data table right before statistical test\n" "## Key data table 2 summary \n\n" "## Statistical test 1\n" "## Statistical test result 1\n\n" "## Result plot 1\n\n" "## End of the script\n"))
+    (insert (concat "## Creation date: "  (format-time-string "%Y-%m-%d %H:%M:%S") " \n\n"
+                    "## What does it do: \n\n"
+                    "## Statistical tests: \n\n"
+                    "## Data we need (Only include data you really need, don't put everything all together. \n"
+                    "## You can't combine them before you can correctly divide to get them.): \n\n"
+                    "## Key data table 1: data table right after finish data cleaning \n"
+                    "## Key data table summary \n"
+                    "## Key data table 2: data table right before statistical test\n"
+                    "## Key data table 2 summary \n\n"
+                    "## Statistical test 1\n"
+                    "## Statistical test result 1\n\n"
+                    "## Result plot 1\n\n"
+                    "## traditional DEG analysis plots:\n"
+                    "a) volcano plot for visualizing significance and fold change \n"
+                    "b) boxplot with jitter dots and p value to check samples\n"
+                    "c) heatmap to check clustering of samples\n"
+                    "## End of the script\n"))
    )
   )
 ;; create an easy readable ruby script
@@ -87,20 +103,37 @@ Argument PROJECT-ROOT-DIR work directory for your project."
   "grep content in paper file using helm-do-ag"
   (helm-do-ag (expand-file-name "~/Dropbox/pdf-paper"))
   )
-(defun ghan_add_to_ag_code()
-  (interactive)
-  "add current workdir to ag search list(by softlink it to dropbox/codes)"
-  let (;;(project-root-dir (read-directory-name "Enter script name([a-z].[0-9].xxx.r):"))
-       ;;(default-directory project-root-dir)
-       (command-make-image (concat "R --no-save <" (prin1-to-string configuration-layer-private-layer-directory) "r-pipeline-manager/show_pipeline.r"))
-       (flowchart-file-name "pipeline-diagram.png"))
-  (message command-make-image)
-  (shell-command command-make-image)
-  )
+;; (defun ghan_add_to_ag_code()
+;;   (interactive)
+;;   "add current workdir to ag search list(by softlink it to dropbox/codes)"
+;;   let (;;(project-root-dir (read-directory-name "Enter script name([a-z].[0-9].xxx.r):"))
+;;        ;;(default-directory project-root-dir)
+;;        (command-make-image (concat "R --no-save <" (prin1-to-string configuration-layer-private-layer-directory) "r-pipeline-manager/show_pipeline.r"))
+;;        (flowchart-file-name "pipeline-diagram.png"))
+;;   (message command-make-image)
+;;   (shell-command command-make-image)
+;;   )
+
 (defun ghan-helm-do-ag-codes()
   (interactive)
   "grep content in code files using helm-do-ag"
   (helm-do-ag (expand-file-name "~/Dropbox/codes"))
   )
+;; (defun ghan-counsel-ag-codes()
+;;   (interactive)
+;;   "grep content in code files using helm-do-ag"
+;;   (counsel-ag (expand-file-name "~/Dropbox/codes"))
+;;   )
+;; (defun ghan-open-file-at-point-in-external-app (arg)
+;;   "Open file under cursor in external application."
+;;   (interactive "P")
+;;   (if arg
+;;       (spacemacs//open-in-external-app (expand-file-name default-directory))
+;;     (let ((file-path (if (derived-mode-p 'dired-mode)
+;;                          (dired-get-file-for-visit)
+;;                        buffer-file-name)))
+;;       (if file-path
+;;           (spacemacs//open-in-external-app file-path)
+;;         (message "No file associated to this buffer.")))))
 ;;; pipeline.el ends here
 
