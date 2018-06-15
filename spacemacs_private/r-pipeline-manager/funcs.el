@@ -159,4 +159,12 @@ Argument PROJECT-ROOT-DIR work directory for your project."
   (interactive)
   (insert (buffer-file-name (current-buffer)))
   )
+(defun ghan-sp2tab ()
+  "replace continuing whitespace to tab"
+
+  (interactive)
+  (goto-char (point-min))
+  (while (re-search-forward " +" nil t)
+    (replace-match "\t" nil t))
+  )
 ;;; pipeline.el ends here
