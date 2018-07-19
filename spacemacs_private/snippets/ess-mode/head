@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: time and what does it do 
+# key: head
+# --
+## `(format-time-string "%y-%m-%d %H:%M:%S" (current-time)))`$0
+## (What it does) $0
+## (To save our life, try to make it in <= 150 lines, Please)

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: set input and out dir
+# key: wd
+# --
+inputD=$1;outputD=$2;
+if(!dir.exist(outputD)) dir.create(outputD)
+setwd(outputD)

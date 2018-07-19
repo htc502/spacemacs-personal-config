@@ -2,6 +2,4 @@
 # name: library frequently used packages
 # key: lib
 # --
-library(readxl)
-library(readr)
-library(dplyr)
+rm(list = ls());library(readxl);library(readr);library(dplyr)

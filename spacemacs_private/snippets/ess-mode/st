@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name:  st - using broom for wilcox or t test
+# key:  st
+# --
+tRes = $1 %>%
+    group_by($2) %>%
+    do(broom::tidy(wilcox.test(.\$$3 ~ .\$$4))) 
+Param = $1 %>%
+    group_by($2,$4) %>%
+    summarise(n = n(),
+              med = median($3),
+              meand = mean($3))
+$5 = left_join(tRes,filter(Param,$4 == $6),by = \'$2\') %>%
+     left_join(filter(Param,$4 == $7),by = \'$2\')
+
