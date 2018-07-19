@@ -39,28 +39,60 @@ Argument PROJECT-ROOT-DIR work directory for your project."
 ;;(ghan-generate-r-pipeline-flowchart )
 
 ;;some small auxiliary fxns
-(defun ghan-swapOperand(start end)
+(defun ghan-swapEqual(start end)
+  "swap the word at the two side of ="
+
   (interactive "r")
-  "swap the operators in the two side of ="
   (let ((selContent (buffer-substring-no-properties start end)))
     ;;    (message selContent)
     (delete-region start end)
     (goto-char start)
     (insert (string-join (reverse  (split-string selContent "="))  "=")))
   )
-;;insert date and time
+(defun ghan-swapComma(start end)
+  "swap the word at the two side of ,"
+
+  (interactive "r")
+  (let ((selContent (buffer-substring-no-properties start end)))
+    ;;    (message selContent)
+    (delete-region start end)
+    (goto-char start)
+    (insert (string-join (reverse  (split-string selContent ","))  ",")))
+  )
+
+;;insert date time
 (defun ghan-insert-current-date ()
   (interactive)
-       (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
+  (insert (format-time-string "%y-%m-%d %H:%M:%S" (current-time))))
+
 ;;create an easy readable r script
 (defun ghan-new-r-script ()
   (interactive)
   "create an r script that is easily readable"
+
   (progn
     (pop-to-buffer (generate-new-buffer "new-r-script"))
-   (insert (concat "## Creation date: "  (format-time-string "%Y-%m-%d %H:%M:%S") " \n\n" "## What does it do: \n\n" "## Statistical tests: \n\n" "## Data we need (Only include data you really need, don't put everything all together. \n## You can't combine them before you can correctly divide to get them.): \n\n"  "## Key data table 1: data table right after finish data cleaning \n" "## Key data table summary \n" "## Key data table 2: data table right before statistical test\n" "## Key data table 2 summary \n\n" "## Statistical test 1\n" "## Statistical test result 1\n\n" "## Result plot 1\n\n" "## End of the script\n"))
-   )
+    (insert (concat "## Creation date: "  (format-time-string "%Y-%m-%d %H:%M:%S") " \n\n" "## What does it do: \n\n" "## Statistical tests: \n\n" "## Data we need (Only include data you really need, don't put everything all together. \n## You can't combine them before you can correctly divide to get them.): \n\n"  "## Key data table 1: data table right after finish data cleaning \n" "## Key data table summary \n" "## Key data table 2: data table right before statistical test\n" "## Key data table 2 summary \n\n" "## Statistical test 1\n" "## Statistical test result 1\n\n" "## Result plot 1\n\n" "## End of the script\n"))
+    )
+  (insert (concat "## Creation date: "  (format-time-string "%Y-%m-%d %H:%M:%S") " \n\n"
+                  "## What does it do: \n\n"
+                  "## Statistical tests: \n\n"
+                  "## Data we need (Only include data you really need, don't put everything all together. \n"
+                  "## You can't combine them before you can correctly divide to get them.): \n\n"
+                  "## Key data table 1: data table right after finish data cleaning \n"
+                  "## Key data table summary \n"
+                  "## Key data table 2: data table right before statistical test\n"
+                  "## Key data table 2 summary \n\n"
+                  "## Statistical test 1\n"
+                  "## Statistical test result 1\n\n"
+                  "## Result plot 1\n\n"
+                  "## traditional DEG analysis plots:\n"
+                  "a) volcano plot for visualizing significance and fold change \n"
+                  "b) boxplot with jitter dots and p value to check samples\n"
+                  "c) heatmap to check clustering of samples\n"
+                  "## End of the script\n"))
   )
+
 ;; create an easy readable ruby script
 (defun ghan-new-rb-script ()
   (interactive)
@@ -69,7 +101,7 @@ Argument PROJECT-ROOT-DIR work directory for your project."
     (pop-to-buffer (generate-new-buffer "new-ruby-script"))
     (insert (concat "## Creation date: " (format-time-string "%Y-%m-%d %H:%M:%S") "\n\n" "## What does it do: \n\n" "## End of the script\n"))
     )
-    )
+  )
 ;; grep content in pdf files (useful when writing scientific paper)
 ;; require pdfgrep tool available from brew
 ;;(defun ghan-pdfgrep()
@@ -103,5 +135,36 @@ Argument PROJECT-ROOT-DIR work directory for your project."
   "grep content in code files using helm-do-ag"
   (helm-do-ag (expand-file-name "~/Dropbox/codes"))
   )
+;; (defun ghan-counsel-ag-codes()
+;;   (interactive)
+;;   "grep content in code files using helm-do-ag"
+;;   (counsel-ag (expand-file-name "~/Dropbox/codes"))
+;;   )
+;; (defun ghan-open-file-at-point-in-external-app (arg)
+;;   "Open file under cursor in external application."
+;;   (interactive "P")
+;;   (if arg
+;;       (spacemacs//open-in-external-app (expand-file-name default-directory))
+;;     (let ((file-path (if (derived-mode-p 'dired-mode)
+;;                          (dired-get-file-for-visit)
+;;                        buffer-file-name)))
+;;       (if file-path
+;;           (spacemacs//open-in-external-app file-path)
+;;         (message "No file associated to this buffer.")))))
 ;;; pipeline.el ends here
 
+(defun ghan-insert-filename ()
+  "Insert file name of current buffer at current point"
+
+  (interactive)
+  (insert (buffer-file-name (current-buffer)))
+  )
+(defun ghan-sp2tab ()
+  "replace continuing whitespace to tab"
+
+  (interactive)
+  (goto-char (point-min))
+  (while (re-search-forward " +" nil t)
+    (replace-match "\t" nil t))
+  )
+;;; pipeline.el ends here
