@@ -3,5 +3,5 @@
 # key: wd
 # --
 inputD=$1;outputD=$2;
-if(!dir.exist(outputD)) dir.create(outputD)
+if(!dir.exists(outputD)) dir.create(outputD)
 setwd(outputD)
