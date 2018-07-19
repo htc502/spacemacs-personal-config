@@ -135,11 +135,11 @@ Argument PROJECT-ROOT-DIR work directory for your project."
   "grep content in code files using helm-do-ag"
   (helm-do-ag (expand-file-name "~/Dropbox/codes"))
   )
-;; (defun ghan-counsel-ag-codes()
-;;   (interactive)
-;;   "grep content in code files using helm-do-ag"
-;;   (counsel-ag (expand-file-name "~/Dropbox/codes"))
-;;   )
+(defun ghan-counsel-ag-codes()
+  (interactive)
+  "grep content in code files using helm-do-ag"
+  (counsel-ag nil (expand-file-name "~/Dropbox/codes"))
+  )
 ;; (defun ghan-open-file-at-point-in-external-app (arg)
 ;;   "Open file under cursor in external application."
 ;;   (interactive "P")
@@ -151,7 +151,6 @@ Argument PROJECT-ROOT-DIR work directory for your project."
 ;;       (if file-path
 ;;           (spacemacs//open-in-external-app file-path)
 ;;         (message "No file associated to this buffer.")))))
-;;; pipeline.el ends here
 
 (defun ghan-insert-filename ()
   "Insert file name of current buffer at current point"
